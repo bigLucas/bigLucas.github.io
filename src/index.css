@@ -51,3 +51,20 @@ li {
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+table {
+    width: 100%;
+    border-left: 5px solid #4caf50;
+}
+
+th, td {
+    text-align: left;
+}
+
+th {
+    padding: 4px;
+}
+
+td {
+    padding-left: 4px;
+}

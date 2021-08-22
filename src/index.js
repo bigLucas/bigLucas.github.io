@@ -34,7 +34,7 @@ function submitFormAction(event, form, storage) {
  function clickButtonAction(event, storage) {
     event.preventDefault();
     storage.clear();
-    cleanList();
+    cleanTable();
 }
 
 /**
@@ -69,25 +69,28 @@ function updateGrinderList(storage, grinderName) {
  */
 function displayData(storage) {
     const grinderList = storage.getItem(GRINDER_LIST_STORAGE_KEY).split(GRINDER_LIST_DELIMITER);
-    let list = document.getElementById('grinders');
-    list.remove();
-    list = document.createElement('ul');
-    list.id = 'grinders';
+    let tbodyGrinders = document.getElementById('tbody_grinders');
+    tbodyGrinders.remove();
+    tbodyGrinders = document.createElement('tbody');
+    tbodyGrinders.id = 'tbody_grinders';
     grinderList.forEach(grinder => {
         if (grinder) {
-            const grinderName = grinder.trim();
-            const position = storage.getItem(grinderName);
-            const item = document.createElement('li');
-            item.appendChild(document.createTextNode(`The ${grinderName} grinder is at ${position} position`));
-            list.appendChild(item);
-            document.getElementById('list').appendChild(list);
+            const grinderName = document.createElement('td');
+            grinderName.innerHTML = grinder.trim();
+            const position = document.createElement('td');
+            position.innerHTML = storage.getItem(grinder.trim());
+            const tableRow = document.createElement('tr');
+            tableRow.appendChild(grinderName);
+            tableRow.appendChild(position);
+            tbodyGrinders.appendChild(tableRow);
+            document.getElementById('table').appendChild(tbodyGrinders);
         }
     });
 }
 
-function cleanList() {
-    document.getElementById('grinders').remove();
-    const list = document.createElement('ul');
-    list.id = 'grinders';
-    document.getElementById('list').appendChild(list);
+function cleanTable() {
+    document.getElementById('tbody_grinders').remove();
+    const tbodyGrinders = document.createElement('tbody');
+    tbodyGrinders.id = 'tbody_grinders';
+    document.getElementById('table').appendChild(tbodyGrinders);
 }
