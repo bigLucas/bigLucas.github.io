@@ -34,6 +34,7 @@ function submitFormAction(event, form, storage) {
  function clickButtonAction(event, storage) {
     event.preventDefault();
     storage.clear();
+    cleanList();
 }
 
 /**
@@ -82,4 +83,11 @@ function displayData(storage) {
             document.getElementById('list').appendChild(list);
         }
     });
+}
+
+function cleanList() {
+    document.getElementById('grinders').remove();
+    const list = document.createElement('ul');
+    list.id = 'grinders';
+    document.getElementById('list').appendChild(list);
 }
